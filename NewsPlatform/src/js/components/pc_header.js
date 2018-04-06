@@ -52,7 +52,7 @@ class PCHeader extends React.Component {
         };
         //获取表单数据，是一个Object
         var formData = this.props.form.getFieldsValue();
-        console.log(formData)
+        console.log(formData);
         fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action +
             "&username=" + formData.userName +
             "&password=" + formData.password +

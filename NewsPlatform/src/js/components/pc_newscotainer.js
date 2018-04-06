@@ -29,12 +29,10 @@ class PCNewsContainer extends React.Component {
                                     <div><img src="./src/images/carousel_3.jpg" alt=""/></div>
                                     <div><img src="./src/images/carousel_4.jpg" alt=""/></div>
                                 </Carousel>
-                                {/*新闻小版块*/}
-                                <div>
-                                    <PCNewsImageBlock count={6} type="guoji" width="400px"
-                                                      cardTitle="国际头条" imageWidth="112px"/>
-                                </div>
                             </div>
+                            {/*新闻小版块*/}
+                            <PCNewsImageBlock count={6} type="guoji" width="400px"
+                                              cardTitle="国际头条" imageWidth="112px"/>
                         </div>
                         <Tabs className="tabs_news">
                             <TabPane tab="新闻" key="1">

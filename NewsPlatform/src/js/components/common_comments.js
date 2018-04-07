@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col} from 'antd'
 import {Router, Route, Link, browserHistory} from 'react-router'
-import {Menu, Icon, Tabs, message, Form, Input, Button, Card, Modal} from 'antd';
+import {Menu, Icon, Tabs, message, Form, Input, Button, Card, notification} from 'antd';
 
 //用于登录表单
 const FormItem = Form.Item;
@@ -44,6 +44,19 @@ class CommonComments extends React.Component {
                 this.componentDidMount();
             })
     }
+    addUserCollection() {
+        var myFetchOptions = {
+            method: 'GET'
+        };
+        fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=uc" +
+            "&userid="+localStorage.userid
+            +"&uniquekey="+this.props.uniquekey, myFetchOptions)
+            .then(response=>response.json())
+            .then(json=>{
+                //收藏成功后进行全局提醒，弹出notification
+                notification['success']({message:'ReactNews提醒', description:'收藏文章成功！'});
+            })
+    }
     render() {
         let {getFieldDecorator} = this.props.form;
         const {comments} = this.state;
@@ -53,7 +66,7 @@ class CommonComments extends React.Component {
                       extra={<a href="#">发布于{comment.datetime}</a>}>
                     <p>{comment.Comments}</p>
                 </Card>
-            ))
+            )).reverse()
             :
             "loading..."
         return (
@@ -68,6 +81,8 @@ class CommonComments extends React.Component {
                                 )}
                             </FormItem>
                             <Button type="primary" htmlType="submit">提交评论</Button>
+                            &nbsp; &nbsp;
+                            <Button type="primary" htmlType="button" onClick={this.addUserCollection.bind(this)}>收藏该文章</Button>
                         </Form>
                     </Col>
                 </Row>

@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import PCIndex from './components/pc_index'
 import MobileIndex from './components/mobile_index'
 import PCNewsDetails from './components/pc_news_details'
+import MobileNewsDetails from './components/mobile_news_details'
 //移动端
 import MediaQuery from 'react-responsive'
 class Root extends React.Component {
@@ -20,7 +21,10 @@ class Root extends React.Component {
 
                 {/*移动端*/}
                 <MediaQuery query='(max-device-width: 1224px)'>
-                    <MobileIndex/>
+                    <Router history={hashHistory}>
+                        <Route path="/" component={MobileIndex} />
+                        <Route path="/details/:uniquekey" component={MobileNewsDetails} />
+                    </Router>
                 </MediaQuery>
             </div>
         );

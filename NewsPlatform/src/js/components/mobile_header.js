@@ -21,7 +21,10 @@ class MobileHeader extends React.Component {
         }
     }
     componentWillMount() {
-        if (localStorage.userid!==0) {
+        //用于测试移动端个人中心
+        // localStorage.userid = 0;
+        // localStorage.userNickName = '';
+        if (localStorage.userid !== '') {
             this.setState({
                 hasLogined: true,
                 userid: localStorage.userid,
@@ -88,10 +91,13 @@ class MobileHeader extends React.Component {
         localStorage.userNickName = '';
         this.setState({hasLogined: false});
     }
+// <Icon type="inbox" onClick={this.logout.bind(this)}/>
     render() {
         let {getFieldDecorator} = this.props.form;
         const userShow = this.state.hasLogined ?
-            <Icon type="inbox" onClick={this.logout.bind(this)}/>
+            <Link to={`/usercenter`}>
+                <Icon type="inbox"/>
+            </Link>
             :
             <Icon type="setting" onClick={this.login.bind(this)}/>
         return (

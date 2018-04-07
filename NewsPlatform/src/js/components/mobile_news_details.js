@@ -1,6 +1,7 @@
 import React from 'react';
 import MobileHeader from './mobile_header'
 import MobileFooter from './mobile_footer'
+import CommonComments from './common_comments'
 import {Route, Router, Link, browserHistory} from 'react-router';
 import {Row, Col, Tabs, Card} from 'antd';
 
@@ -40,6 +41,8 @@ class PCNewsDetails extends React.Component {
                     <Row>
                         <Col span={24} className="container">
                             <div className="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}></div>
+                            <hr/>
+                            <CommonComments uniquekey={this.props.params.uniquekey}/>
                         </Col>
                     </Row>
                     <MobileFooter/>

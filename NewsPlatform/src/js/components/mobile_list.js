@@ -10,9 +10,10 @@ class MobileList extends React.Component {
         super();
         this.state = {
             news: [],
-            count: 5,
+            count: 10,
             hasMore: 0,
             initializing: 1,
+            idx: 0,
             refreshedAt: Date.now()
         }
     }
@@ -30,11 +31,11 @@ class MobileList extends React.Component {
             });
     }
     //resolve参数，标识处理是否完成，完成则关掉刷新的小圈圈
-    loadMore(resolve) {
+    handleLoadMore(resolve) {
         setTimeout(()=>{
             const count = this.state.count;
             this.setState({
-                count: count+5,
+                count: count+10,
             })
             var myFetchOptions = {
                 method: 'GET'
@@ -47,7 +48,32 @@ class MobileList extends React.Component {
                     this.setState({news: json})
                 });
             this.setState({
-                hasMore: count>0 && count<50
+                hasMore: count>0 && count<80
+            })
+            resolve();
+        }, 2e3);
+    }
+
+    handleRefresh(resolve, reject){
+        setTimeout(()=>{
+            const idx = this.state.idx;
+            const count = this.state.count;
+            this.setState({
+                idx: idx+5,
+                count: count+10,
+            })
+            var myFetchOptions = {
+                method: 'GET'
+            };
+            fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type="
+                +this.props.type+"&count="+this.state.count, myFetchOptions)
+                .then(response=> response.json())
+                .then(json => {
+                    console.log(json);
+                    this.setState({news: json.slice(idx)})
+                });
+            this.setState({
+                hasMore: count>0 && count<80
             })
             resolve();
         }, 2e3);
@@ -94,7 +120,8 @@ class MobileList extends React.Component {
                 <Row>
                     <Col span={24}>
                         <Tloader className="main"
-                                 onLoadMore={this.loadMore.bind(this)}
+                                 onLoadMore={this.handleLoadMore.bind(this)}
+                                 onRefresh={this.handleRefresh.bind(this)}
                                  hasMore={hasMore}
                                  initializing={initializing}>
                             {newsList}

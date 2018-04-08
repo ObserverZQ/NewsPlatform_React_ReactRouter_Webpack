@@ -19,9 +19,9 @@ class PCNewsDetails extends React.Component {
         var myFetchOptions = {
             method: 'GET'
         };
-        console.log('uniquekey: ' + this.props.params.uniquekey);
+        console.log('uniquekey: ' + this.props.match.params.uniquekey);
         fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey="
-            + this.props.params.uniquekey, myFetchOptions)
+            + this.props.match.params.uniquekey, myFetchOptions)
             .then(response => response.json())
             .then(json => {
                 this.setState({newsItem: json});
@@ -42,7 +42,7 @@ class PCNewsDetails extends React.Component {
                         <Col span={24} className="container">
                             <div className="articleContainer" dangerouslySetInnerHTML={this.createMarkup()}></div>
                             <hr/>
-                            <CommonComments uniquekey={this.props.params.uniquekey}/>
+                            <CommonComments uniquekey={this.props.match.params.uniquekey}/>
                         </Col>
                     </Row>
                     <MobileFooter/>

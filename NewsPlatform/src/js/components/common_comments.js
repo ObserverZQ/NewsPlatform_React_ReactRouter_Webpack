@@ -62,7 +62,7 @@ class CommonComments extends React.Component {
         const {comments} = this.state;
         const commentList = comments.length ?
             comments.map((comment, index)=>(
-                <Card key={index} title={comment.userName}
+                <Card key={index} title={comment.UserName}
                       extra={<a href="#">发布于{comment.datetime}</a>}>
                     <p>{comment.Comments}</p>
                 </Card>
@@ -73,7 +73,6 @@ class CommonComments extends React.Component {
             <div className="comment">
                 <Row>
                     <Col span={24}>
-                        {commentList}
                         <Form onSubmit={this.handleSubmit.bind(this)}>
                             <FormItem label="您的评论">
                                 {getFieldDecorator('remark', {initialValue: ''})(
@@ -84,6 +83,7 @@ class CommonComments extends React.Component {
                             &nbsp; &nbsp;
                             <Button type="primary" htmlType="button" onClick={this.addUserCollection.bind(this)}>收藏该文章</Button>
                         </Form>
+                        {commentList}
                     </Col>
                 </Row>
             </div>

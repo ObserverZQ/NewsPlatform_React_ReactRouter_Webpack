@@ -3,6 +3,9 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+    devServer: {
+      historyApiFallback: true
+    },
     context: path.join(__dirname),
     devtool: debug ? "inline-sourcemap" : null,
     entry: "./src/js/root.js",
@@ -24,7 +27,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loader: "style!css!less"
+                loader: "style-loader!css-loader!less-loader"
             }
         ]
     },

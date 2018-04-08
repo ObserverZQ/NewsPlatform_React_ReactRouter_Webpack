@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, Link, browserHistory} from 'react-router';
+import {Link} from 'react-router-dom'
 import {Row, Col, Tabs, Card} from 'antd';
 const TabPane = Tabs.TabPane;
 
@@ -39,7 +39,7 @@ class PCNewsImageBlock extends React.Component {
         const newsList = news.length!==0 ?
             news.map((newsItem, index) => (
                <div key={index} className="imageblock">
-                   <Link to={`details/${newsItem.uniqueKey}`} target="_blank">
+                   <Link to={`details/${newsItem.uniquekey}`} target="_blank">
                        <div className="custom-iamge">
                            <img style={styleImage} src={newsItem.thumbnail_pic_s} alt=""/>
                        </div>

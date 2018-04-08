@@ -84,7 +84,7 @@ class MobileUserCenter extends React.Component {
                       extra={<a href={`/#/details/${uc.uniquekey}`}>查看</a>}>
                     <p>{uc.Title}</p>
                 </Card>
-            ))
+            )).reverse()
             :
             '您没有收藏任何新闻';
         const usercommentList = usercomments.length ?

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, Link, browserHistory} from 'react-router';
+import {Link} from 'react-router-dom'
 import {Row, Col, Tabs, Card} from 'antd';
 const TabPane = Tabs.TabPane;
 
@@ -13,12 +13,13 @@ class MobileList extends React.Component {
             count: 10,
             hasMore: 0,
             initializing: 1,
-            idx: 0,
+            idx: 5,
             refreshedAt: Date.now()
         }
     }
 
     componentWillMount() {
+        const idx = this.state.idx;
         var myFetchOptions = {
             method: 'GET'
         };
@@ -27,7 +28,7 @@ class MobileList extends React.Component {
             .then(response=> response.json())
             .then(json => {
                 console.log(json);
-                this.setState({news: json})
+                this.setState({news: json.slice(idx)})
             });
     }
     //resolve参数，标识处理是否完成，完成则关掉刷新的小圈圈
@@ -37,7 +38,7 @@ class MobileList extends React.Component {
             this.setState({
                 count: count+10,
             })
-            var myFetchOptions = {
+            const myFetchOptions = {
                 method: 'GET'
             };
             fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type="
@@ -48,21 +49,21 @@ class MobileList extends React.Component {
                     this.setState({news: json})
                 });
             this.setState({
-                hasMore: count>0 && count<80
+                hasMore: count>0 && count<90
             })
             resolve();
         }, 2e3);
     }
 
     handleRefresh(resolve, reject){
+        const idx = this.state.idx;
+        const count = this.state.count;
+        this.setState({
+            idx: idx+5,
+            count: count+5,
+        });
         setTimeout(()=>{
-            const idx = this.state.idx;
-            const count = this.state.count;
-            this.setState({
-                idx: idx+5,
-                count: count+10,
-            })
-            var myFetchOptions = {
+            const myFetchOptions = {
                 method: 'GET'
             };
             fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type="
@@ -74,7 +75,7 @@ class MobileList extends React.Component {
                 });
             this.setState({
                 hasMore: count>0 && count<80
-            })
+            });
             resolve();
         }, 2e3);
     }
@@ -120,6 +121,7 @@ class MobileList extends React.Component {
                 <Row>
                     <Col span={24}>
                         <Tloader className="main"
+                                 autoLoadMore={true}
                                  onLoadMore={this.handleLoadMore.bind(this)}
                                  onRefresh={this.handleRefresh.bind(this)}
                                  hasMore={hasMore}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router, Link, browserHistory} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Row, Col, Tabs, Card} from 'antd';
 const TabPane = Tabs.TabPane;
 

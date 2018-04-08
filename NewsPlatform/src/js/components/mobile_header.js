@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row, Col} from 'antd'
-import {Router, Route, Link, browserHistory} from 'react-router'
+import {Link} from 'react-router-dom'
 import {Menu, Icon, Tabs, message, Form, Input, Button, Checkbox, Modal} from 'antd';
 
 //用于登录表单
@@ -103,8 +103,8 @@ class MobileHeader extends React.Component {
         return (
             <div id="mobileHeader">
                 <header>
-                    <img src="./src/images/logo.png" alt=""/>
-                    <span>ReactNews</span>
+                    <img src="/src/images/logo.png" alt=""/>
+                    <Link to={`/`}><span>ReactNews</span></Link>
                     {userShow}
                 </header>
                 {/*弹出框隐藏的，写哪都行*/}

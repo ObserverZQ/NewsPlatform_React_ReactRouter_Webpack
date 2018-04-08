@@ -3,13 +3,13 @@ import MobileHeader from './mobile_header'
 import MobileFooter from './mobile_footer'
 import MobileList from './mobile_list'
 import {Row, Col, Carousel} from 'antd'
-import {Router, Route, Link, browserHistory} from 'react-router'
 import {Menu, Icon, Tabs, message, Form, Input, Button, Checkbox, Modal} from 'antd';
 
 const TabPane = Tabs.TabPane;
 class MobileIndex extends React.Component{
 
     render() {
+        document.title = "React News";
         const settings = {
             dots: true,
             infinite: true,

@@ -2,9 +2,10 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 const BabiliPlugin = require("babili-webpack-plugin");
+const url = "http://localhost:8080";
 module.exports = {
     devServer: {
-      historyApiFallback: true //report specific errors in console
+        historyApiFallback: true //report specific errors in console
     },
     // performance:{
     //     hints: 'warning', // the level of file, throw a warning if suprass limit
@@ -13,7 +14,7 @@ module.exports = {
     // },
     context: path.join(__dirname),
     // devtool: debug ? "inline-sourcemap" : null,
-    devtool: "source-map",
+    // devtool: "source-map",
     entry: {
         app: "./src/js/root.js",
         vendor: ['react']
@@ -41,7 +42,7 @@ module.exports = {
         ]
     },
     output: {
-        path: __dirname,
+        path: path.resolve(__dirname, "build"),
         filename: "[name].js"
     },
     // plugins: debug ? [] : [

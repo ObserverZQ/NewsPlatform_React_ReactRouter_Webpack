@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col} from 'antd'
 import {Link} from 'react-router-dom'
-import {Menu, Icon, Tabs, message, Form, Input, Button, Checkbox, Modal} from 'antd';
+import {Menu, Icon, Tabs, message, Form, Input, Button, Checkbox, Modal, Dropdown} from 'antd';
 
 //用于登录表单
 const FormItem = Form.Item;
@@ -48,12 +48,12 @@ class MobileHeader extends React.Component {
     handleSubmit(e) {
         //页面向API提交数据
         e.preventDefault();
-        var myFetchOptions = {
+        const myFetchOptions = {
             method: 'GET'
         };
         //获取表单数据，是一个Object
-        var formData = this.props.form.getFieldsValue();
-        console.log(formData)
+        const formData = this.props.form.getFieldsValue();
+        console.log(formData);
         fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action +
             "&username=" + formData.userName +
             "&password=" + formData.password +
@@ -93,13 +93,23 @@ class MobileHeader extends React.Component {
     }
 // <Icon type="inbox" onClick={this.logout.bind(this)}/>
     render() {
+        const menu = (
+            <Menu>
+                <Menu.Item>
+                    <Link to={`/usercenter`}>个人中心</Link>
+                </Menu.Item>
+                <Menu.Item>
+                    <span onClick={this.logout.bind(this)}>退出</span>
+                </Menu.Item>
+            </Menu>
+        );
         let {getFieldDecorator} = this.props.form;
         const userShow = this.state.hasLogined ?
-            <Link to={`/usercenter`}>
+            <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
                 <Icon type="inbox"/>
-            </Link>
+            </Dropdown>
             :
-            <Icon type="setting" onClick={this.login.bind(this)}/>
+            <Icon type="setting" onClick={this.login.bind(this)}/>;
         return (
             <div id="mobileHeader">
                 <header>

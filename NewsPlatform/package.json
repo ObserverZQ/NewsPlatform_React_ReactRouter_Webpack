@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --inline --hot",
-    "pack": "webpack -p"
+    "pack": "webpack -p",
+    "stats": "webpack --env production --profile --json > stats.json"
   },
   "author": "",
   "license": "ISC",

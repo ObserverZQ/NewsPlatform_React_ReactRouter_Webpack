@@ -17,11 +17,15 @@ module.exports = {
                     plugins: ['react-html-attrs'], //添加组件的插件配置
                 }
             },
-            //下面是使用ant-design的配置文件
+            //下面是使用ant-design和react上拉加载组件的配置文件
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
             },
+            {
+                test: /\.less$/,
+                loader: "style!css!less"
+            }
         ]
     },
     output: {

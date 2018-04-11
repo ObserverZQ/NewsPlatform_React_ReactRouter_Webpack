@@ -86,7 +86,7 @@ class MobileUserCenter extends React.Component {
                 </Card>
             )).reverse()
             :
-            '您没有收藏任何新闻';
+            '';
         const usercommentList = usercomments.length ?
             usercomments.map((comment, index)=>(
                 <Card key={index} title={`${comment.uniquekey}   ${comment.datetime}`}
@@ -95,7 +95,7 @@ class MobileUserCenter extends React.Component {
                 </Card>
             )).reverse()
             :
-            '您没有评论任何新闻';
+            '';
         return (
             <div>
                 <MobileHeader/>

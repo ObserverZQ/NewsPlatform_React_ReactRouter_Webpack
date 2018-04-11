@@ -23,12 +23,14 @@ class PCHeader extends React.Component {
     }
 
     componentWillMount() {
-        if (localStorage.userid!==0) {
-            this.setState({
-                hasLogined: true,
-                userid: localStorage.userid,
-                userNickName: localStorage.userNickName
-            });
+        if (localStorage.getItem('userid') != null) {
+            if (localStorage.getItem('userid').length!==0) {
+                this.setState({
+                    hasLogined: true,
+                    userid: localStorage.userid,
+                    userNickName: localStorage.userNickName
+                });
+            }
         }
     }
     setModalVisible(value) {

@@ -21,15 +21,14 @@ class MobileHeader extends React.Component {
         }
     }
     componentWillMount() {
-        //用于测试移动端个人中心
-        // localStorage.userid = 0;
-        // localStorage.userNickName = '';
-        if (localStorage.userid !== '') {
-            this.setState({
-                hasLogined: true,
-                userid: localStorage.userid,
-                userNickName: localStorage.userNickName
-            });
+        if (localStorage.getItem('userid') != null) {
+            if (localStorage.getItem('userid').length!==0) {
+                this.setState({
+                    hasLogined: true,
+                    userid: localStorage.userid,
+                    userNickName: localStorage.userNickName
+                });
+            }
         }
     }
     setModalVisible(value) {
@@ -64,8 +63,8 @@ class MobileHeader extends React.Component {
             .then(json => {
                 console.log(json);
                 this.setState({userNickName: json.NickUserName, userid: json.UserId});
-                localStorage.userid = json.UserId;
-                localStorage.userNickName = json.NickUserName;
+                localStorage.setItem('userid', json.UserId);
+                localStorage.setItem('userNickName', json.NickUserName);
             });
         if (this.state.action === "login") {
             this.setState({hasLogined: true});
@@ -95,10 +94,10 @@ class MobileHeader extends React.Component {
     render() {
         const menu = (
             <Menu>
-                <Menu.Item>
+                <Menu.Item className="m_userMenu">
                     <Link to={`/usercenter`}>个人中心</Link>
                 </Menu.Item>
-                <Menu.Item>
+                <Menu.Item className="m_userMenu">
                     <span onClick={this.logout.bind(this)}>退出</span>
                 </Menu.Item>
             </Menu>
@@ -113,8 +112,8 @@ class MobileHeader extends React.Component {
         return (
             <div id="mobileHeader">
                 <header>
-                    <img src="/src/images/logo.png" alt=""/>
-                    <Link to={`/`}><span>ReactNews</span></Link>
+                    <img src="/src/images/news.png" alt=""/>
+                    <Link to={`/`}><span>Observer</span></Link>
                     {userShow}
                 </header>
                 {/*弹出框隐藏的，写哪都行*/}

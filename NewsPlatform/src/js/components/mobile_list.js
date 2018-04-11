@@ -10,10 +10,10 @@ class MobileList extends React.Component {
         super();
         this.state = {
             news: [],
-            count: 10,
+            count: 20,
             hasMore: 0,
             initializing: 1,
-            idx: 5,
+            idx: 10,
             refreshedAt: Date.now()
         }
     }
@@ -37,7 +37,7 @@ class MobileList extends React.Component {
             const count = this.state.count;
             this.setState({
                 count: count+10,
-            })
+            });
             const myFetchOptions = {
                 method: 'GET'
             };
@@ -50,7 +50,7 @@ class MobileList extends React.Component {
                 });
             this.setState({
                 hasMore: count>0 && count<90
-            })
+            });
             resolve();
         }, 2e3);
     }
@@ -71,7 +71,7 @@ class MobileList extends React.Component {
                 .then(response=> response.json())
                 .then(json => {
                     console.log(json);
-                    this.setState({news: json.slice(idx)})
+                    this.setState({news: json.slice(idx+5)})
                 });
             this.setState({
                 hasMore: count>0 && count<80

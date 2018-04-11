@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 import PCIndex from './components/pc_index'
 import MobileIndex from './components/mobile_index'
 import PCNewsDetails from './components/pc_news_details'
